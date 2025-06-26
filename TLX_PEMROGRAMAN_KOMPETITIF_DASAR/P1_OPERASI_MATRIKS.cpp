@@ -35,21 +35,21 @@ int main(){
         cin >> temp;
 
         if(temp == "_"){
+             for(short i = 0 ; i < size ; i++){
+                short t = 0, b = size - 1;
+                while(t < b){
+                    swap(arr[t][i],arr[b][i]);
+                    t++;
+                    b--;
+                }
+            }
+        }else if(temp == "|"){
             for(short i = 0 ; i < size ; i++){
                 short l = 0 , r = size - 1;
                 while(l < r){
                     swap(arr[i][l],arr[i][r]);
                     l++;
                     r--;
-                }
-            }
-        }else if(temp == "|"){
-            for(short i = 0 ; i < size ; i++){
-                short t = 0, b = size - 1;
-                while(t < b){
-                    swap(arr[t][i],arr[b][i]);
-                    t++;
-                    b--;
                 }
             }
         }else if(temp == "90"){
