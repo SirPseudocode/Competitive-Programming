@@ -11,14 +11,19 @@
 using namespace std;
 const int mod = 1e9 + 7;
 
-ll C(ll n, ll k){
-    if (k > n - k) k = n - k;
-    long long res = 1;
-    for (long long i = 1; i <= k; ++i) {
-        res *= (n - i + 1);
-        res /= i;
+void precomputeCombination(int N, vector<vector<int>>& C) {
+    C.resize(N + 1, vector<int>(N + 1, 0));
+    
+    for (int i = 0; i <= N; i++) {
+        C[i][0] = 1;
     }
-    return res;
+    
+    for (int i = 1; i <= N; i++) {
+        for (int j = 1; j < i; j++) {
+            C[i][j] = (C[i - 1][j - 1] + C[i - 1][j]) % mod;
+        }
+        C[i][i] = 1;
+    }
 }
 
 int main(){
@@ -26,11 +31,16 @@ int main(){
     cin.tie(0);
     cout.tie(0);
 
-    ll n, a, b, ans = 0;
+    int n,a,b;
     cin >> n >> a >> b;
-    for(ll i = a ; i <= b ; i++){
-        ans += C(n,i) % mod;
+
+    v<v<int>> c;
+    precomputeCombination(n,c);
+    ll ans = 0;
+    for(int i = a ; i <= b ; i++){
+        ans = (ans % mod + (c[n][i] % mod)) % mod;
     }
-    cout << ans % mod << '\n';
+
+    cout << ans << '\n';
     return 0;
 }
