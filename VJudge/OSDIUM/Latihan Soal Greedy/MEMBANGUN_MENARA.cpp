@@ -16,5 +16,18 @@ int main(){
     cin.tie(0);
     cout.tie(0);
 
-    
+    int t;
+    cin >> t;
+
+    while(t--){
+        int n, x, y, z, highest = 0, lowest = 0;
+        cin >> n;
+        while(n--){
+            cin >> x >> y >> z;
+            highest += max(x,max(y,z));
+            lowest += min(x,min(y,z));
+        }
+        cout << lowest << ' ' << highest << '\n';
+    }
+    return 0;
 }
