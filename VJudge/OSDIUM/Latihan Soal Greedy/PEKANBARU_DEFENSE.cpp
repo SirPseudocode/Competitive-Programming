@@ -8,6 +8,7 @@
 #define fi first
 #define se second
 #define pb push_back
+#define pqueue priority_queue
 using namespace std;
 const int mod = 1e9 + 7;
 
@@ -16,30 +17,52 @@ int main(){
     cin.tie(0);
     cout.tie(0);
 
+    ll n, sd, sm, total =0;
+    bool y = 1;
+    pqueue <ll> pq;
     string s;
     cin >> s;
 
-    int n, sd, sm;
-    cin >> n >> sd >> sm;
-    
-    n--;
+    cin >> n >>  sd >> sm;
 
-    int p, k, l, ans = 0;
-    while(n--){
-        cin >> p >> k >> l;
-        if(p > sd){
-            cout << "-1\n";
-            return 0;
+    ll p[n+5], k[n+5], l[n+5];
+    for(ll i = 0 ; i< n - 1 ; i++){
+        cin >> p[i] >> k[i] >> l[i];
+        total += k[i];
+    }
+
+    for(ll i = 0 ; i < n - 1; i++){
+        while(sd < p[i]){
+            if(pq.empty()){
+                y = 0;
+                break;
+            }
+
+            sd++;
+            total -= pq.top();
+            pq.pop();
         }
 
-        ans += min(k,l);
-        sd++;
+        if(l[i] <= k[i]){
+            total -= (k[i] - l[i]);
+            sd++;
+        }else{
+            pq.push(k[i] - l[i]);
+        }
     }
 
-    if(sd >= sm){
-        cout << ans << '\n';
-    }else{
-        cout << "-1\n";
+    while(sd<sm){
+        if(pq.empty()){
+            y = 0;
+            break;
+        }
+
+        sd++;
+        total -= pq.top();
+        pq.pop();
     }
+
+    if(sd < sm || !y) cout << "-1\n";
+    else cout << total << '\n';
     return 0;
 }
