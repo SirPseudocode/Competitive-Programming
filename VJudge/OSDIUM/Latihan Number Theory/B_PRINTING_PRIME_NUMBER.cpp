@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <numeric>
 #define ll long long
 #define ull unsigned long long
 #define unset unordered_set
@@ -17,23 +16,30 @@ int main(){
     cin.tie(0);
     cout.tie(0);
 
-    const int N = 1e8;
-    v<bool> eliminated(N + 1, false);
-    
+    const int limit = 1e8;
+
+    v<bool> eliminated(limit, false);
+    v<ull> isprime;
+
     eliminated[0] = eliminated[1] = true;
-    
-    for(long long i = 2; i * i <= N; i++){
+
+    for(ull i = 2; i * i < limit ; i++){
         if(!eliminated[i]){
-            for(long long j = i * i; j <= N; j += i){
+            for(ull j = i * i; j < limit; j += i){
                 eliminated[j] = true;
             }
         }
     }
-    
-    for(int i = 2; i <= N; i++){
+
+    for(ull i = 2 ; i < limit ; i++){
         if(!eliminated[i]){
-            cout << i << '\n';
+            isprime.pb(i);
         }
     }
+
+    for(ull i = 0 ; i < isprime.size() ; i += 100){
+        cout << isprime[i] << '\n';
+    }
+
     return 0;
 }
