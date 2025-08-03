@@ -12,30 +12,30 @@
 using namespace std;
 const int mod = 1e9 + 7;
 
-v<ll> SieveofEratosthenos(int lim){
-    v<bool> eliminated(lim + 1, false);
+v<ll> SieveofEratosthenos(ll lim){
+    v<bool> eliminated(lim+1, 0);
     v<ll> isprime;
-    eliminated[0] = eliminated[1] = true;
+    eliminated[0] = eliminated[1] = 1;
 
     ll last = 2;
     for(ll i = 2 ; i * i <= lim ; i++){
         if(!eliminated[i]){
-            isprime.push_back(i);
+            isprime.pb(i);
             for(ll j = i * i ; j <= lim ; j += i)
-            eliminated[j] = true;
+            eliminated[j] = 1;
         }
         last = i + 1;
     }
 
     for(ll i = last ; i <= lim ; i++){
-        if(!eliminated[i])
-        isprime.push_back(i);
+        if(!eliminated[i]) isprime.pb(i);
     }
     return isprime;
 }
 
 v<ll> SegmentedSieve(ll l, ll r){
     if(l == 1) l = 2;
+    if(l > r) return {};
     
     v<ll> primes = SieveofEratosthenos(sqrt(r));
     v<bool> segsieve(r - l + 1, true);
@@ -58,13 +58,5 @@ int main(){
     cin.tie(0);
     cout.tie(0);
 
-    int t,m,n;
-    cin >> t;
-    while(t--){
-        cin >> m >> n;
-        v<ll> ans = SegmentedSieve(m, n);
-        for(ll out : ans)
-        cout << out << '\n';
-        if(t != 0) cout << '\n';
-    }
+    
 }
