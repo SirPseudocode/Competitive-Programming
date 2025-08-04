@@ -1,44 +1,28 @@
 #include <bits/stdc++.h>
-#include <numeric>
 #define ll long long
-#define ull unsigned long long
-#define unset unordered_set
-#define mset multiset
-#define v vector
-#define f first
-#define s second
-#define pb push_back
 using namespace std;
-const int mod = 1e9 + 7;
 
-ll gcd(int x, int y){
-    if(y == 0) return x;
-    return gcd(x, y % x);
+ll gcd(ll a, ll b){
+    if(b == 0) return a;
+    return gcd(b, a % b);
 }
 
-ll lcm(int x, int y){
-    return (x * y)/gcd(x,y);
+ll lcm(ll a, ll b){
+    return a / gcd(a,b) * b;
 }
 
 int main(){
     ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+    cin.tie(0); cout.tie(0);
 
-    ll a,b,c,d,e,f;
+    ll a,b,c,d;
     cin >> a >> b >> c >> d;
-    f = lcm(b,d);
-    a *= (f / b);
-    c *= (f / d);
 
-    e = a + c;
-
-    while(gcd(e,f) > 1){
-        ll temp = gcd(e,f);
-        e /= temp;
-        f /= temp;
-    }
-
-    cout << e << ' ' << f << '\n';
+    ll denominator = lcm(b,d);
+    a *= denominator / b;
+    c *= denominator / d;
+    ll numerator = a + c;
+    ll div = gcd(numerator, denominator);
+    cout << numerator / div << ' ' << denominator / div << '\n';
     return 0;
 }

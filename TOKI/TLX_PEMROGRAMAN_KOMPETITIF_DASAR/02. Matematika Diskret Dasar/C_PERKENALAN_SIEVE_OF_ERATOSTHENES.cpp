@@ -1,49 +1,38 @@
 #include <bits/stdc++.h>
-#include <numeric>
-#define ll long long
-#define ull unsigned long long
-#define unset unordered_set
-#define mset multiset
-#define v vector
-#define f first
-#define s second
-#define pb push_back
 using namespace std;
-const int mod = 1e9 + 7;
 
-vector<int> sieve(int n) {
-    vector<bool> is_prime(n + 1, true);
-    vector<int> primes;
-    
-    is_prime[0] = is_prime[1] = false;
-    
-    for (int i = 2; i <= n; i++) {
-        if (is_prime[i]) {
-            primes.push_back(i);
-            if ((long long)i * i <= n) {
-                for (int j = i * i; j <= n; j += i) {
-                    is_prime[j] = false;
-                }
+vector<int> SieveofEratosthenos(int n){
+    vector<bool> eliminated(n + 1, 0);
+    vector<int> isprime;
+
+    isprime.reserve( n / log(n) * 1.25);
+
+    eliminated[0] = eliminated[1] = 1;
+    for(int i = 2; i * i <= n ; i++){
+        if(!eliminated[i]){
+            for(int j = i * i ; j <= n ; j += i){
+                eliminated[j] = 1;
             }
         }
     }
-    return primes;
+
+    for(int i = 2 ; i <= n ; i++){
+        if(!eliminated[i]) isprime.push_back(i);
+    }
+    return isprime;
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
 
-    vector<int> primes = sieve(1000000);
-    
-    int n;
-    cin >> n;
-    
-    while (n--) {
-        int k;
+int main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    vector<int> ans = SieveofEratosthenos(1000000);
+    int t,k;
+    cin >> t;
+    while(t--){
         cin >> k;
-        cout << primes[k - 1] << '\n';
+        cout << ans[k - 1] << '\n';
     }
-    
     return 0;
 }

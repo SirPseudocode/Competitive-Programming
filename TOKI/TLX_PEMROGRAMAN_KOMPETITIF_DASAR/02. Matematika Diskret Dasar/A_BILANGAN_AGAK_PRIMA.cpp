@@ -7,35 +7,29 @@
 using namespace std;
 const int mod = 1e9 + 7;
 
-bool Check(int n){
-    int f = 0;
+bool SemiPrima(int n){
+    if(n <= 0) return 0;
+
+    int count = 2;
     for(int i = 2 ; i * i <= n ; i++){
         if(n % i == 0){
-            f++;
-            if(f >= 2){
-                return 0;
-            }
+            if(n / i == i) count++;
+            else count += 2;
         }
     }
-    return 1;
+    return count <= 4;
 }
-
 
 int main(){
     ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+    cin.tie(0); cout.tie(0);
 
-    int t;
+    int t, n;
     cin >> t;
     while(t--){
-        int temp;
-        cin >> temp;
-        if(Check(temp)){
-            cout << "YA\n";
-        }else{
-            cout << "BUKAN\n";
-        }
+        cin >> n;
+        if(SemiPrima(n)) cout << "YA\n";
+        else cout << "BUKAN\n";
     }
     return 0;
 }
