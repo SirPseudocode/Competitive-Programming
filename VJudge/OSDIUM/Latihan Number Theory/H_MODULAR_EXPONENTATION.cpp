@@ -11,6 +11,17 @@
 using namespace std;
 const int mod = 1e9 + 7;
 
+ll ans(ll n){
+    if(n >= 64) return LLONG_MAX;
+
+    ll result = 1;
+    for(ll i = 0 ; i < n ; i++){
+        if(result > LLONG_MAX / 2) return LLONG_MAX;
+        result *=2;
+    }
+    return result;
+}
+
 int main(){
     ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -19,10 +30,9 @@ int main(){
     int n, m;
     cin >> n >> m;
     
-    if(n >= 64){
-        cout << m << '\n';
-    }else{
-        
-    }
+    ll temp = ans(n);
+    if(temp == LLONG_MAX) cout << m << '\n';
+    else cout << m % temp << '\n';
+    
     return 0;
 }
