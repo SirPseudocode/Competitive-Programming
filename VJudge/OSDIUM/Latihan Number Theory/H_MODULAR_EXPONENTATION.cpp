@@ -12,7 +12,7 @@ using namespace std;
 const int mod = 1e9 + 7;
 
 ll ans(ll n){
-    if(n >= 64) return LLONG_MAX;
+    if(n >= 32) return LLONG_MAX;
 
     ll result = 1;
     for(ll i = 0 ; i < n ; i++){

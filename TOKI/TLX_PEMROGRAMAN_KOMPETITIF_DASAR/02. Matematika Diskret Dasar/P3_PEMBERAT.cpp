@@ -1,33 +1,19 @@
 #include <bits/stdc++.h>
-#include <numeric>
-#define ll long long
-#define ull unsigned long long
-#define unset unordered_set
-#define mset multiset
-#define v vector
-#define f first
-#define s second
-#define pb push_back
 using namespace std;
-const int mod = 1e9 + 7;
 
-signed main(){
+int main(){
     ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+    cin.tie(0); cout.tie(0);
 
-    ll b,k;
+    long long b, k;
     cin >> b >> k;
-
-    ll s = k - b, best = 1;
-    while(best < s) best *=2;
-    while(s > 0 && best > 0){
-        if(s - best >= 0){
-            s -= best;
-            cout << best << '\n';
+    b = k - b; k = 1;
+    while(k < b) k *=2;
+    while(b > 0 && k > 0){
+        if(b - k >= 0){
+            cout << k <<'\n';
+            b -= k;
         }
-
-        best /= 2;
+        k /= 2;
     }
-    return 0;
 }

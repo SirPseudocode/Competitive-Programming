@@ -28,8 +28,8 @@ signed main(){
         int in, f;
         cin >> in;
         f = gcd(x,in);
-        x *= in;
         x /= f;
+        x *= in;
     }
     cout << x << '\n';
     return 0;
