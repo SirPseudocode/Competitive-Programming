@@ -11,7 +11,7 @@ void solve(){
         cout << -1 << '\n';
         return;
     }else{
-        int it = 0;
+        int it = 1;
         while(inp[it] == inp[0]) it++;
         cout << it << ' ' << n - it << '\n';
         for(int i = 0 ; i < it ; i++) cout << inp[i] << ' ';
