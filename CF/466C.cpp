@@ -1,29 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main(){
+int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
     int n;
     cin >> n;
-    vector<int> arr(n + 1);
-    arr[0] = 0;
-    for(int i = 1 ; i <= n ;i++){
-        cin >> arr[i];
-        arr[i] += arr[i - 1];
+
+    long long sum = 0;
+    vector<int> arr(n);
+    for(auto &x : arr){
+        cin >> x;
+        sum += x;
     }
 
-    int res = 0;
-    for(int i = 2 ; i < n ; i++){
-        for(int j = i ; j < n ; j++){
-            if
-            (
-                ((arr[i - 1] - arr[0]) == (arr[j] - arr[i - 1])) &&
-                ((arr[j] - arr[i - 1]) == (arr[n] - arr[j]))
-            ) res++;
+    if (sum % 3 != 0) {
+        cout << 0 << "\n";
+        return 0;
+    }
+
+    long long part = sum / 3;
+    long long twoPart = 2 * part;
+
+    long long prefix = 0;
+    long long cnt = 0, ways = 0;
+
+    for (int i = 0; i < n - 1; i++) {
+        prefix += arr[i];
+
+        if (prefix == twoPart) {
+            ways += cnt;
+        }
+        if (prefix == part) {
+            cnt++;
         }
     }
-    cout << res << endl;
-    return 0;
+
+    cout << ways << endl;
 }
